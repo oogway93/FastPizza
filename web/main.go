@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"strconv"
-	"time"
+	// "time"
 
 	"github.com/gin-gonic/gin"
 	pb "github.com/oogway93/FastPizza/proto"
@@ -24,8 +24,9 @@ func (h *Handler) fibonacciHandler(c *gin.Context) {
 	n := c.Query("n")
 	N, err := strconv.Atoi(n)
 	utils.FailOnError(err)
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
+	// ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx := context.Background()
+	// defer cancel()
 	response, err := h.client.Fib(ctx, &pb.FibReq{N: int64(N)})
 	utils.FailOnError(err)
 

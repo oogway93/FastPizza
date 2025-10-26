@@ -1,5 +1,5 @@
 run:
-	sudo docker compose up -d --build
+	sudo docker compose up --build
 stop:
 	sudo docker compose down 
 gen:

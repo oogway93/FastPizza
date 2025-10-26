@@ -16,7 +16,7 @@ services:
     ports:
       - "8081:8081"
     depends_on:
-      - web 
+      - rabbitmq 
 
   web:
     container_name: web 
@@ -25,38 +25,39 @@ services:
       context: .
       dockerfile: Dockerfile.web
     depends_on:
-      # - rabbitmq
+      - rabbitmq
       - nginx
+      - grpc-server
   
-  # worker:
-  #   container_name: worker
-  #   restart: always
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.worker
-  #   depends_on:
-  #     - rabbitmq
+  worker:
+    container_name: worker
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    # depends_on:
+    #   - rabbitmq
   
 
-  # rabbitmq:
-  #   container_name: rabbitmq
-  #   image: rabbitmq:3.10.7-management
-  #   hostname: rabbitmq
-  #   restart: always
-  #   environment:
-  #     - RABBITMQ_DEFAULT_USER=guest
-  #     - RABBITMQ_DEFAULT_PASS=guest
-  #   volumes:
-  #     - rabbitmq-data:/var/lib/rabbitmq
-  #   ports:
-  #     - 15672:15672
-  #     - 5672:5672
-  #   healthcheck:
-  #     test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
-  #     interval: 10s
-  #     timeout: 5s
-  #     retries: 10
-  #     start_period: 30s
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3.10.7-management
+    hostname: rabbitmq
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    ports:
+      - 15672:15672
+      - 5672:5672
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 
-# volumes:
-#   rabbitmq-data:
+volumes:
+  rabbitmq-data:
