@@ -2,3 +2,5 @@ run:
 	sudo docker compose up -d --build
 stop:
 	sudo docker compose down 
+gen:
+	protoc --proto_path=proto --go_out=proto --go-grpc_out=proto proto/*.proto

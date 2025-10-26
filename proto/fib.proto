@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = ".";
+
+service Fibonacci {
+    rpc Fib(FibReq) returns (FibRes);
+}
+
+message FibReq {
+    int64 n = 1;
+}
+
+message FibRes {
+    int64 n = 1;
+}
