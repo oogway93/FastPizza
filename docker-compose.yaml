@@ -3,7 +3,7 @@ services:
     container_name: nginx
     build:
       context: ./nginx
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.nginx
     ports:
       - "80:80"
   # rpc-server:
@@ -17,14 +17,14 @@ services:
   #   depends_on:
   #     - rabbitmq
   #     - api
-  api:
-    container_name: api
+  web:
+    container_name: web 
     restart: always
     build:
       context: .
-      dockerfile: Dockerfile.api
+      dockerfile: Dockerfile.web
     depends_on:
-      - rabbitmq
+      # - rabbitmq
       - nginx
   
   # worker:
@@ -37,25 +37,25 @@ services:
   #     - rabbitmq
   
 
-  rabbitmq:
-    container_name: rabbitmq
-    image: rabbitmq:3.10.7-management
-    hostname: rabbitmq
-    restart: always
-    environment:
-      - RABBITMQ_DEFAULT_USER=guest
-      - RABBITMQ_DEFAULT_PASS=guest
-    volumes:
-      - rabbitmq-data:/var/lib/rabbitmq
-    ports:
-      - 15672:15672
-      - 5672:5672
-    healthcheck:
-      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 30s
+  # rabbitmq:
+  #   container_name: rabbitmq
+  #   image: rabbitmq:3.10.7-management
+  #   hostname: rabbitmq
+  #   restart: always
+  #   environment:
+  #     - RABBITMQ_DEFAULT_USER=guest
+  #     - RABBITMQ_DEFAULT_PASS=guest
+  #   volumes:
+  #     - rabbitmq-data:/var/lib/rabbitmq
+  #   ports:
+  #     - 15672:15672
+  #     - 5672:5672
+  #   healthcheck:
+  #     test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 10
+  #     start_period: 30s
 
-volumes:
-  rabbitmq-data:
+# volumes:
+#   rabbitmq-data:
