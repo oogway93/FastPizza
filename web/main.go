@@ -23,6 +23,10 @@ type OrderInfo struct {
 	Email    string  `json:"email"`
 }
 
+type OrderID struct {
+	OrderID int `json:"order_id"`
+}
+
 func NewHandler(fibClient pb.FibonacciClient, OrderClient pb.OrderServiceClient) *Handler {
 	return &Handler{clientFib: fibClient, clientOrder: OrderClient}
 }
@@ -31,9 +35,7 @@ func (h *Handler) fibonacciHandler(c *gin.Context) {
 	n := c.Query("n")
 	N, err := strconv.Atoi(n)
 	utils.FailOnError(err, "Conversion of n to type's int ")
-	// ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	ctx := context.Background()
-	// defer cancel()
 	response, err := h.clientFib.Fib(ctx, &pb.FibReq{N: int64(N)})
 	utils.FailOnError(err, "Response in Fib rpc method")
 
@@ -60,6 +62,16 @@ func (h *Handler) makeOrderHandler(c *gin.Context) {
 			Price: float32(orderInfo.Price),
 		},
 	})
+	c.JSON(200, response.GetOrderId())
+}
+
+func (h *Handler) getStatusHandler(c *gin.Context) {
+	orderID := &OrderID{}
+	err := c.BindJSON(orderID)
+	utils.FailOnError(err, "Binding orderIDJSON to struct orderID")
+
+	ctx := context.Background()
+	response, err := h.clientOrder.GetStatus(ctx, &pb.OrderID{OrderId: int64(orderID.OrderID)})
 	c.JSON(200, response)
 }
 
@@ -71,5 +83,7 @@ func main() {
 	handler := NewHandler(clientFib, clientOrder)
 	r := gin.Default()
 	r.GET("/fib", handler.fibonacciHandler)
+	r.POST("/order", handler.makeOrderHandler)
+	r.GET("/order", handler.getStatusHandler)
 	r.Run()
 }
