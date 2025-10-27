@@ -98,15 +98,15 @@ func main() {
 
 	log.Println("Connecting to RabbitMQ...")
 	conn, err := amqp.Dial("amqp://guest:guest@rabbitmq:5672/")
-	utils.FailOnError(err)
+	utils.FailOnError(err, "RabbitMQ connection unsuccess")
 	defer conn.Close()
 	log.Println("Successfully connected to RabbitMQ")
 
 	ch, err := conn.Channel()
-	utils.FailOnError(err)
+	utils.FailOnError(err, "Cannot open RabbitMQ's channel")
 	defer ch.Close()
 
-	q, err := ch.QueueDeclare(
+	q1, err := ch.QueueDeclare(
 		"fib_tasks", // queue name
 		true,        // durable
 		false,       // delete when unused
@@ -114,16 +114,19 @@ func main() {
 		false,       // no-wait
 		nil,         // arguments
 	)
-	utils.FailOnError(err)
-	log.Printf("Queue '%s' declared", q.Name)
+	utils.FailOnError(err, "Declaration queue isn't success")
+	log.Printf("Queue '%s' declared", q1.Name)
 
-	// Увеличиваем prefetch чтобы worker мог обрабатывать несколько задач
-	err = ch.Qos(
-		3,     // prefetch count
-		0,     // prefetch size
-		false, // global
+	q2, err := ch.QueueDeclare(
+		"order_tasks", // queue name
+		true,        // durable
+		false,       // delete when unused
+		false,       // exclusive
+		false,       // no-wait
+		nil,         // arguments
 	)
-	utils.FailOnError(err)
+	utils.FailOnError(err, "Declaration queue isn't success")
+	log.Printf("Queue '%s' declared", q2.Name)
 
 	msgs, err := ch.Consume(
 		q.Name, // queue
@@ -134,7 +137,7 @@ func main() {
 		false,  // no-wait
 		nil,    // args
 	)
-	utils.FailOnError(err)
+	utils.FailOnError(err, "Consuming from queue")
 
 	log.Printf("Worker started. Waiting for messages on queue '%s'...", q.Name)
 

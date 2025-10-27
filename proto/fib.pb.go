@@ -114,16 +114,249 @@ func (x *FibRes) GetN() int64 {
 	return 0
 }
 
+type OrderInfo struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Cred *Credentials `protobuf:"bytes,1,opt,name=cred,proto3" json:"cred,omitempty"`
+	Menu *OrderedMenu `protobuf:"bytes,2,opt,name=menu,proto3" json:"menu,omitempty"`
+}
+
+func (x *OrderInfo) Reset() {
+	*x = OrderInfo{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_fib_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *OrderInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderInfo) ProtoMessage() {}
+
+func (x *OrderInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_fib_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderInfo.ProtoReflect.Descriptor instead.
+func (*OrderInfo) Descriptor() ([]byte, []int) {
+	return file_fib_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *OrderInfo) GetCred() *Credentials {
+	if x != nil {
+		return x.Cred
+	}
+	return nil
+}
+
+func (x *OrderInfo) GetMenu() *OrderedMenu {
+	if x != nil {
+		return x.Menu
+	}
+	return nil
+}
+
+type OrderID struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrderId int64 `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+}
+
+func (x *OrderID) Reset() {
+	*x = OrderID{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_fib_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *OrderID) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderID) ProtoMessage() {}
+
+func (x *OrderID) ProtoReflect() protoreflect.Message {
+	mi := &file_fib_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderID.ProtoReflect.Descriptor instead.
+func (*OrderID) Descriptor() ([]byte, []int) {
+	return file_fib_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *OrderID) GetOrderId() int64 {
+	if x != nil {
+		return x.OrderId
+	}
+	return 0
+}
+
+type OrderedMenu struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Pizza string  `protobuf:"bytes,1,opt,name=pizza,proto3" json:"pizza,omitempty"`
+	Price float32 `protobuf:"fixed32,2,opt,name=price,proto3" json:"price,omitempty"`
+}
+
+func (x *OrderedMenu) Reset() {
+	*x = OrderedMenu{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_fib_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *OrderedMenu) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderedMenu) ProtoMessage() {}
+
+func (x *OrderedMenu) ProtoReflect() protoreflect.Message {
+	mi := &file_fib_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderedMenu.ProtoReflect.Descriptor instead.
+func (*OrderedMenu) Descriptor() ([]byte, []int) {
+	return file_fib_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *OrderedMenu) GetPizza() string {
+	if x != nil {
+		return x.Pizza
+	}
+	return ""
+}
+
+func (x *OrderedMenu) GetPrice() float32 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
+type Credentials struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Username string `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Email    string `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+}
+
+func (x *Credentials) Reset() {
+	*x = Credentials{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_fib_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Credentials) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Credentials) ProtoMessage() {}
+
+func (x *Credentials) ProtoReflect() protoreflect.Message {
+	mi := &file_fib_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Credentials.ProtoReflect.Descriptor instead.
+func (*Credentials) Descriptor() ([]byte, []int) {
+	return file_fib_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *Credentials) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *Credentials) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
 var File_fib_proto protoreflect.FileDescriptor
 
 var file_fib_proto_rawDesc = []byte{
 	0x0a, 0x09, 0x66, 0x69, 0x62, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x16, 0x0a, 0x06, 0x46,
 	0x69, 0x62, 0x52, 0x65, 0x71, 0x12, 0x0c, 0x0a, 0x01, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03,
 	0x52, 0x01, 0x6e, 0x22, 0x16, 0x0a, 0x06, 0x46, 0x69, 0x62, 0x52, 0x65, 0x73, 0x12, 0x0c, 0x0a,
-	0x01, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x01, 0x6e, 0x32, 0x24, 0x0a, 0x09, 0x46,
-	0x69, 0x62, 0x6f, 0x6e, 0x61, 0x63, 0x63, 0x69, 0x12, 0x17, 0x0a, 0x03, 0x46, 0x69, 0x62, 0x12,
-	0x07, 0x2e, 0x46, 0x69, 0x62, 0x52, 0x65, 0x71, 0x1a, 0x07, 0x2e, 0x46, 0x69, 0x62, 0x52, 0x65,
-	0x73, 0x42, 0x03, 0x5a, 0x01, 0x2e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x01, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x01, 0x6e, 0x22, 0x4f, 0x0a, 0x09, 0x4f,
+	0x72, 0x64, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x20, 0x0a, 0x04, 0x63, 0x72, 0x65, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74,
+	0x69, 0x61, 0x6c, 0x73, 0x52, 0x04, 0x63, 0x72, 0x65, 0x64, 0x12, 0x20, 0x0a, 0x04, 0x6d, 0x65,
+	0x6e, 0x75, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72,
+	0x65, 0x64, 0x4d, 0x65, 0x6e, 0x75, 0x52, 0x04, 0x6d, 0x65, 0x6e, 0x75, 0x22, 0x24, 0x0a, 0x07,
+	0x4f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x44, 0x12, 0x19, 0x0a, 0x08, 0x6f, 0x72, 0x64, 0x65, 0x72,
+	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x6f, 0x72, 0x64, 0x65, 0x72,
+	0x49, 0x64, 0x22, 0x39, 0x0a, 0x0b, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x65, 0x64, 0x4d, 0x65, 0x6e,
+	0x75, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x69, 0x7a, 0x7a, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x05, 0x70, 0x69, 0x7a, 0x7a, 0x61, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x02, 0x52, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x22, 0x3f, 0x0a,
+	0x0b, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x12, 0x1a, 0x0a, 0x08,
+	0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
+	0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69,
+	0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x32, 0x24,
+	0x0a, 0x09, 0x46, 0x69, 0x62, 0x6f, 0x6e, 0x61, 0x63, 0x63, 0x69, 0x12, 0x17, 0x0a, 0x03, 0x46,
+	0x69, 0x62, 0x12, 0x07, 0x2e, 0x46, 0x69, 0x62, 0x52, 0x65, 0x71, 0x1a, 0x07, 0x2e, 0x46, 0x69,
+	0x62, 0x52, 0x65, 0x73, 0x32, 0x54, 0x0a, 0x0c, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x53, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x12, 0x21, 0x0a, 0x09, 0x47, 0x65, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75,
+	0x73, 0x12, 0x08, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x44, 0x1a, 0x0a, 0x2e, 0x4f, 0x72,
+	0x64, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x21, 0x0a, 0x09, 0x4d, 0x61, 0x6b, 0x65, 0x4f,
+	0x72, 0x64, 0x65, 0x72, 0x12, 0x0a, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f,
+	0x1a, 0x08, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x44, 0x42, 0x03, 0x5a, 0x01, 0x2e, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -138,19 +371,29 @@ func file_fib_proto_rawDescGZIP() []byte {
 	return file_fib_proto_rawDescData
 }
 
-var file_fib_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_fib_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_fib_proto_goTypes = []interface{}{
-	(*FibReq)(nil), // 0: FibReq
-	(*FibRes)(nil), // 1: FibRes
+	(*FibReq)(nil),      // 0: FibReq
+	(*FibRes)(nil),      // 1: FibRes
+	(*OrderInfo)(nil),   // 2: OrderInfo
+	(*OrderID)(nil),     // 3: OrderID
+	(*OrderedMenu)(nil), // 4: OrderedMenu
+	(*Credentials)(nil), // 5: Credentials
 }
 var file_fib_proto_depIdxs = []int32{
-	0, // 0: Fibonacci.Fib:input_type -> FibReq
-	1, // 1: Fibonacci.Fib:output_type -> FibRes
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	5, // 0: OrderInfo.cred:type_name -> Credentials
+	4, // 1: OrderInfo.menu:type_name -> OrderedMenu
+	0, // 2: Fibonacci.Fib:input_type -> FibReq
+	3, // 3: OrderService.GetStatus:input_type -> OrderID
+	2, // 4: OrderService.MakeOrder:input_type -> OrderInfo
+	1, // 5: Fibonacci.Fib:output_type -> FibRes
+	2, // 6: OrderService.GetStatus:output_type -> OrderInfo
+	3, // 7: OrderService.MakeOrder:output_type -> OrderID
+	5, // [5:8] is the sub-list for method output_type
+	2, // [2:5] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_fib_proto_init() }
@@ -183,6 +426,54 @@ func file_fib_proto_init() {
 				return nil
 			}
 		}
+		file_fib_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*OrderInfo); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_fib_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*OrderID); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_fib_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*OrderedMenu); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_fib_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Credentials); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -190,9 +481,9 @@ func file_fib_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_fib_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   6,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_fib_proto_goTypes,
 		DependencyIndexes: file_fib_proto_depIdxs,
