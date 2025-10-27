@@ -20,7 +20,6 @@ type GRPCServer struct {
 	rabbitConn *amqp.Connection
 }
 
-// Fibonacci service implementation
 func (s *GRPCServer) Fib(ctx context.Context, req *pb.FibReq) (*pb.FibRes, error) {
 	ch, err := s.rabbitConn.Channel()
 	if err != nil {
@@ -55,10 +54,10 @@ func (s *GRPCServer) Fib(ctx context.Context, req *pb.FibReq) (*pb.FibRes, error
 	}
 
 	err = ch.Publish(
-		"",          // exchange
-		"tasks",     // routing key (общая очередь)
-		false,       // mandatory
-		false,       // immediate
+		"",      // exchange
+		"tasks", // routing key (общая очередь)
+		false,   // mandatory
+		false,   // immediate
 		amqp.Publishing{
 			ContentType: "application/json",
 			Body:        taskBody,
@@ -117,7 +116,6 @@ func (s *GRPCServer) Fib(ctx context.Context, req *pb.FibReq) (*pb.FibRes, error
 	}
 }
 
-// OrderService implementation
 func (s *GRPCServer) MakeOrder(ctx context.Context, req *pb.OrderInfo) (*pb.OrderID, error) {
 	ch, err := s.rabbitConn.Channel()
 	if err != nil {
@@ -141,14 +139,14 @@ func (s *GRPCServer) MakeOrder(ctx context.Context, req *pb.OrderInfo) (*pb.Orde
 	taskID := "order_" + strconv.FormatInt(orderID, 10)
 
 	taskMsg := map[string]interface{}{
-		"task_id":   taskID,
-		"type":      "make_order",
-		"order_id":  orderID,
-		"username":  req.Cred.Username,
-		"email":     req.Cred.Email,
-		"pizza":     req.Menu.Pizza,
-		"price":     req.Menu.Price,
-		"reply_to":  replyQueue.Name,
+		"task_id":  taskID,
+		"type":     "make_order",
+		"order_id": orderID,
+		"username": req.Cred.Username,
+		"email":    req.Cred.Email,
+		"pizza":    req.Menu.Pizza,
+		"price":    req.Menu.Price,
+		"reply_to": replyQueue.Name,
 	}
 
 	taskBody, err := json.Marshal(taskMsg)
@@ -220,17 +218,16 @@ func (s *GRPCServer) MakeOrder(ctx context.Context, req *pb.OrderInfo) (*pb.Orde
 	}
 }
 
+// Mock data
 func (s *GRPCServer) GetStatus(ctx context.Context, req *pb.OrderID) (*pb.OrderInfo, error) {
-	// For simplicity, we'll implement a basic in-memory storage
-	// In production, you would use Redis or database
 	return &pb.OrderInfo{
-		// Status:  "preparing",
+		Status:  "preparing",
 		Cred: &pb.Credentials{
-			Username: "test_user", // This would come from storage
+			Username: "test_user",
 			Email:    "test@example.com",
 		},
 		Menu: &pb.OrderedMenu{
-			Pizza: "Margherita", // This would come from storage
+			Pizza: "Margherita",
 			Price: 12.99,
 		},
 	}, nil
@@ -245,12 +242,12 @@ func main() {
 	// Start gRPC server
 	lis, err := net.Listen("tcp", ":8081")
 	utils.FailOnError(err, "Listening port:8081 isn't success")
-	
+
 	s := grpc.NewServer()
 	server := &GRPCServer{rabbitConn: rabbitConn}
 	pb.RegisterFibonacciServer(s, server)
 	pb.RegisterOrderServiceServer(s, server)
-	
+
 	log.Println("gRPC server started on :8081")
 	log.Println("Services: Fibonacci, OrderService")
 	s.Serve(lis)

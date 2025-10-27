@@ -22,6 +22,7 @@ service OrderService {
 message OrderInfo {
     Credentials cred = 1;
     OrderedMenu menu = 2;
+    string status = 3;
 }
 message OrderID {
     int64 order_id = 1;

@@ -84,6 +84,6 @@ func main() {
 	r := gin.Default()
 	r.GET("/fib", handler.fibonacciHandler)
 	r.POST("/order", handler.makeOrderHandler)
-	r.GET("/order", handler.getStatusHandler)
+	r.GET("/order/:id", handler.getStatusHandler)
 	r.Run()
 }

@@ -12,7 +12,6 @@ import (
 
 var orderStorage = make(map[int64]map[string]interface{})
 
-// Fast iterative Fibonacci
 func fibonacci(n int64) int64 {
 	if n <= 1 {
 		return n
@@ -88,7 +87,7 @@ func processOrderTask(taskData map[string]interface{}, ch *amqp.Channel, d amqp.
 
 	log.Printf("Processing order %d for user %s", orderID, username)
 
-	// Store order (in production, use proper database)
+	// Store order 
 	orderStorage[orderID] = map[string]interface{}{
 		"username": username,
 		"email":    email,
@@ -125,9 +124,6 @@ func processOrderTask(taskData map[string]interface{}, ch *amqp.Channel, d amqp.
 }
 
 func main() {
-	// Wait for RabbitMQ to start
-	// time.Sleep(5 * time.Second)
-
 	log.Println("Connecting to RabbitMQ...")
 	conn, err := amqp.Dial("amqp://guest:guest@rabbitmq:5672/")
 	utils.FailOnError(err, "Failed to connect to RabbitMQ")

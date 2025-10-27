@@ -1,0 +1,41 @@
+# Binaries for the current project
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.a
+bin/
+build/
+
+# Go module cache and build artifacts
+.cache/
+pkg/
+vendor/ # If you're using Go modules, this might be unnecessary if modules are managed correctly.
+
+# Test output
+testdata/
+*.test
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*~
+.#*
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Environment variables
+.env
+.env.*
+
+# Temporary files
+tmp/

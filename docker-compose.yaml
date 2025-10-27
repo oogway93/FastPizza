@@ -35,8 +35,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.worker
-    # depends_on:
-    #   - rabbitmq
+    depends_on:
+      - rabbitmq
   
 
   rabbitmq:
